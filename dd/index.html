@@ -1,0 +1,388 @@
+<Scirpt By Hanuma>
+<html>
+<head>
+
+<title>Hi dd!</title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style type="text/css">
+body {
+  background-color:pink;
+  margin:auto;
+  color:chocolate;
+
+}
+
+button {
+  color:red;
+  display:block;margin:auto;
+  text-align:center;
+  size:20px;
+  background-color:black;
+  position:center;
+  font-size:18px;
+}
+
+#text{
+  color: red;
+  font-size: 30px;
+  text-align: center;
+  font-family: "Arial Black";
+  }
+  
+img {
+  display:block;margin:auto;
+  text-align:center;
+}
+
+input {
+  color:red;
+  display:block;margin:auto;
+}
+
+b {
+  display:block;margin:auto;
+  text-align:center;
+}
+
+audio {
+        display: none;
+      }
+      
+h1 {
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align:center;
+  opacity: 0.3;
+  filter: alpha(opacity=40);
+
+}
+
+
+
+
+   .mew {
+       position: relative;
+       top: -webkit-calc(50% - 60px);
+       top: calc(50% - 60px);
+       text-align:center;
+       display:block;margin:auto;
+       text-shadow: 0px 0px 3px white;
+   }
+   .mew:nth-child(1) {
+       -webkit-animation: fade 1000s infinite 2000ms;
+       animation: fade 6s infinite 200ms;
+   }
+   .mew:nth-child(2) {
+       -webkit-animation: fade 8s infinite 400ms;
+       animation: fade 6s infinite 400ms;
+   }
+   .mew:nth-child(3) {
+       -webkit-animation: fade 8s infinite 600ms;
+       animation: fade 6s infinite 600ms;
+   }
+   .mew:nth-child(4) {
+       -webkit-animation: fade 8s infinite 800ms;
+       animation: fade 6s infinite 800ms;
+   }
+   .mew:nth-child(5) {
+       -webkit-animation: fade 8s infinite 1000ms;
+       animation: fade 6s infinite 1000ms;
+   }
+   .mew:nth-child(6) {
+       -webkit-animation: fade 8s infinite 1200ms;
+       animation: fade 6s infinite 1200ms;
+   }
+   .mew:nth-child(7) {
+       -webkit-animation: fade 8s infinite 1400ms;
+       animation: fade 6s infinite 1400ms;
+   }
+
+   @-webkit-keyframes fade {
+       50% {
+
+           opacity: 0.02;
+       }
+   }
+
+   @keyframes fade {
+       50% {
+           opacity: 0.02;
+       }
+   }
+
+
+
+
+</style>
+</head>
+<body>
+
+<br>
+<br>
+<br>
+<span class='mew'><h1> TOUCH HERE </h1></span>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<img src="bear.gif" width="150" height="100" alt="Hanuma">
+<b>Hiii Dd!!!</b><br>
+	<button onclick="tap()">Tap Here</button>
+	<div id="delayedText" style="visibility:hidden">
+	<br>
+	<b> Do You Want To Be My Girlfriend?</b>
+	<br><a href="https://api.whatsapp.com/send?phone=+6285862797682&text=Iyaa%20dd%20Mau%20Jadi%20Ayangnya%20aa"><input type="button" value="Yes I do." onclick="alert('Thanks yah udah mau trima aku apa ada nya');" style="font size="5"></a>
+	
+	<br><a href="https://api.whatsapp.com/send?phone=+6285862797682&text=Maaf%20dd%20nggabisa%20Terima%20aa:("><input type="button" value=" Im sorry" onclick="alert('Baik lah kalau itu mau mu ^_^');" style="font size="5"></a>
+	
+	
+	<div id="text">
+	
+	</div>
+	
+	
+	
+</body>
+
+<audio controls autoplay loop title="Hanuma Amruhu Pachrudin">
+        <source
+        src="lagu.mp3"
+        type="audio/mp3"
+        />
+        </audio>
+        
+        <script language="javascript" type="text/javascript">
+        var audio = document.getElementsByTagName("audio")[0];
+        var image = document.getElementsByTagName("img")[0];
+        var canvas = document.createElement("canvas"),
+        context = canvas.getContext("2d"),
+        w,
+        h,
+        margin = 40,
+        play,
+        lines;
+        
+        document.body.appendChild(canvas);
+        
+        var Vec = function (x, y) {
+        this.x = x;
+        this.y = y;
+        };
+        
+        var Line = function (x1, y1, x2, y2) {
+        this.a = new Vec(x1, y1);
+        this.b = new Vec(x2, y2);
+        this.center = new Vec((x1 + x2) / 2, (y1 + y2) / 2);
+        this.dx = x2 - x1;
+        this.dy = y2 - y1;
+        };
+        
+        
+        
+        function sqDist(v1, v2) {
+        return (v2.x - v1.x) * (v2.x - v1.x) + (v2.y - v1.y) * (v2.y - v1.y);
+        }
+        
+        function segIntersection(l1, l2) {
+        var b_dot_d_perp = l1.dx * l2.dy - l1.dy * l2.dx;
+        if (b_dot_d_perp === 0) {
+        return null;
+        }
+        
+        var cx = l2.a.x - l1.a.x;
+        var cy = l2.a.y - l1.a.y;
+        
+        var t = (cx * l2.dy - cy * l2.dx) / b_dot_d_perp;
+        if (t < 0 || t > 1) {
+        return null;
+        }
+        var u = (cx * l1.dy - cy * l1.dx) / b_dot_d_perp;
+        if (u < 0 || u > 1) {
+        return null;
+        }
+        return new Vec(
+        Math.round(l1.a.x + t * l1.dx),
+        Math.round(l1.a.y + t * l1.dy)
+        );
+        }
+        
+        function getIntersections(line) {
+        var arr = [];
+        for (var i = 0; i < lines.length; i++) {
+        var pt = segIntersection(line, lines[i]);
+        if (pt !== null) {
+        arr.push(pt);
+        }
+        }
+        
+        arr.sort(function (a, b) {
+        var aIsInsideCanvas =
+        a.x >= margin &&
+        a.x <= w - margin &&
+        a.y >= margin &&
+        a.y <= h - margin;
+        var bIsInsideCanvas =
+        b.x >= margin &&
+        b.x <= w - margin &&
+        b.y >= margin &&
+        b.y <= h - margin;
+        if (aIsInsideCanvas && bIsInsideCanvas)
+        return sqDist(a, line.center) < sqDist(b, line.center) ? 1 : -1;
+        else if (aIsInsideCanvas) return 1;
+        else if (bIsInsideCanvas) return -1;
+        else return 0;
+        });
+        
+        return arr;
+        }
+        
+        function getNearestIntersections(line, arr) {
+        var index = arr.length - 2;
+        if (arr[index].x !== line.center.x) {
+        while (
+        Math.sign(line.center.x - line.a.x) ===
+        Math.sign(line.center.x - arr[index].x)
+        ) {
+        index--;
+        }
+        } else {
+        while (
+        Math.sign(line.center.y - line.a.y) ===
+        Math.sign(line.center.y - arr[index].y)
+        ) {
+        index--;
+        }
+        }
+        
+        return [arr[arr.length - 1], arr[index]];
+        }
+        
+        function reduceLine(line, intersections) {
+        line.a = intersections[0];
+        line.b = intersections[1];
+        line.center.x = (line.a.x - line.b.x) / 2;
+        line.center.y = (line.a.y - line.b.y) / 2;
+        line.dx = line.b.x - line.a.x;
+        line.dy = line.b.y - line.a.y;
+        }
+        
+        function applyRule(line) {
+        var intersections = getIntersections(line);
+        intersections = getNearestIntersections(line, intersections);
+        reduceLine(line, intersections);
+        return true;
+        }
+        
+        function createLine() {
+        var pos = new Vec(
+        margin + Math.random() * (w - 2 * margin),
+        margin + Math.random() * (h - 2 * margin)
+        );
+        // var pos = lines[~~(Math.random()*lines.length)].center;
+        
+        // var angle = ~~(Math.random() * 4) * (Math.PI / 4);
+        var angle = Math.random() * Math.PI;
+        
+        var rad = 500;
+        
+        return new Line(
+        pos.x + Math.cos(angle) * rad,
+        pos.y + Math.sin(angle) * rad,
+        pos.x + Math.cos(angle + Math.PI) * rad,
+        pos.y + Math.sin(angle + Math.PI) * rad
+        );
+        }
+        
+        function addNewLine(x1, y1, x2, y2) {
+        if (arguments.length === 0) {
+        var line = createLine();
+        if (applyRule(line)) {
+        line.display();
+        lines.push(line);
+        }
+        } else {
+        lines.push(new Line(x1, y1, x2, y2));
+        if (lines.length === 500) init();
+        }
+        }
+        
+        function init() {
+        console.clear();
+        
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        
+        lines = [];
+        
+        addNewLine(margin, margin, w - margin, margin);
+        addNewLine(margin, h - margin, w - margin, h - margin);
+        addNewLine(margin, margin, margin, h - margin);
+        addNewLine(w - margin, margin, w - margin, h - margin);
+        }
+        
+        function draw() {
+        if (play) window.requestAnimationFrame(draw);
+        addNewLine();
+        }
+        window.addEventListener("load", init);
+        window.addEventListener("resize", init);
+        window.addEventListener("click", function () {
+        play = !play;
+        if (play) {
+        audio.play();
+        draw();
+        }
+        });
+        
+  </script>
+        
+        
+
+
+<script type="text/javascript">
+
+function tap(){
+  alert("Hey How are you?")
+  alert("Aku mau ngomong sesuatu")
+  alert("Tentang aku, bisa di bilang tentang kita.")
+  alert("Aku nyaman sama kamu")
+  alert("Sudah turun jadi suka.")
+  alert("Mungkin bisa jadi cinta")
+  alert("Walaupun beda dari orang lain yang kamu kenal.")
+  alert("Aku gabisa bohong tentang rasa.")
+  alert("Lama di pendam perlahan sakit.")
+  alert("Di diamkan gamau kehilangan.")
+  alert("Ada yang mau aku ungkapin.")
+  alert("Aku gabisa bercanda soal rasa.")
+  alert("So.")
+  alert("Aku Sayang kamu.")
+  alert("Udah gabisa di pendam, enak ga enak aku mau ngungapin biar waktu yang nentukan.")
+  
+ }
+ 
+ 
+ 
+</script>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+</html>
+
+	
