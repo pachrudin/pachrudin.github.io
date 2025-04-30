@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello, Im Pachrudin!</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            color: #fff;
+        }
+
+        /* Background ambient */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0) 20%, rgba(0,0,0,0.8) 100%);
+            z-index: -1;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 960px;
+            padding: 20px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        /* Header */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        /* Paragraph */
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Button */
+        .btn {
+            padding: 10px 20px;
+            background: #ffcc00;
+            color: #000;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: background 0.3s ease-in-out;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #e6b800;
+        }
+
+        /* Responsive design */
+        @media(max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Gaya dasar untuk nama */
+        .name-link {
+            color: #ffcc00; /* Warna teks */
+            font-weight: bold; /* Membuat teks tebal */
+            text-decoration: none; /* Menghilangkan garis bawah */
+            transition: color 0.3s ease, transform 0.3s ease; /* Transisi untuk animasi */
+        }
+
+        /* Hover effect untuk animasi */
+        .name-link:hover {
+            color: #e6b800; /* Ubah warna saat dihover */
+            transform: scale(1.1); /* Sedikit membesarkan teks */
+        }
+
+        /* Active effect untuk saat diklik */
+        .name-link:active {
+            color: #ffaa00; /* Warna saat diklik */
+            transform: scale(1); /* Kembali ke ukuran semula */
+        }
+
+        /* Gaya dasar untuk tautan */
+        .char {
+            display: inline-block;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        /* Animasi untuk setiap huruf */
+        @keyframes move {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Menjalankan animasi dengan jeda yang berbeda */
+        .char:nth-child(1) { animation: move 1s infinite; }
+        .char:nth-child(2) { animation: move 1s infinite 0.1s; }
+        .char:nth-child(3) { animation: move 1s infinite 0.2s; }
+        .char:nth-child(4) { animation: move 1s infinite 0.3s; }
+        .char:nth-child(5) { animation: move 1s infinite 0.4s; }
+        .char:nth-child(6) { animation: move 1s infinite 0.5s; }
+        .char:nth-child(7) { animation: move 1s infinite 0.6s; }
+        .char:nth-child(8) { animation: move 1s infinite 0.7s; }
+        .char:nth-child(9) { animation: move 1s infinite 0.8s; }
+
+        /* Hover effect */
+        .name-link:hover .char {
+            color: #ffaa00;
+        }
+
+        /* Animasi terbang */
+        .fly-left, .fly-right {
+            display: inline-block;
+            transition: transform 0.5s ease;
+        }
+
+        /* Animasi terbang ke kiri */
+        @keyframes flyLeft {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-100px); }
+            75% { transform: translateX(0); }
+        }
+
+        /* Animasi terbang ke kanan */
+        @keyframes flyRight {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(100px); }
+            75% { transform: translateX(0); }
+        }
+
+        /* Menerapkan animasi ke kata-kata */
+        .fly-left {
+            animation: flyLeft 3s ease-in-out infinite;
+        }
+
+        .fly-right {
+            animation: flyRight 3s ease-in-out infinite;
+        }
+
+        /* Container dasar untuk kontak */
+        .contact-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            color: #ffffff;
+        }
+
+        /* Background ambient */
+        .contact-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0) 20%, rgba(0,0,0,0.8) 100%);
+            z-index: -1;
+        }
+
+        /* Header kontak */
+        .contact-container h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #ffcc00;
+            letter-spacing: 2px;
+        }
+
+        /* Gaya dasar untuk kontak */
+        .contact-info {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        /* Item kontak */
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        /* Gambar logo */
+        .contact-item img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        /* Animasi hover */
+        .contact-item:hover {
+            transform: scale(1.1);
+            color: #ffcc00;
+        }
+
+        /* Responsive design */
+        @media(max-width: 768px) {
+            .contact-info {
+                flex-direction: column;
+            }
+            .contact-item {
+                margin-bottom: 20px;
+            }
+        }
+        
+        img {
+        width: 200px; /* Atur lebar gambar sesuai kebutuhan */
+        height: 200px; /* Atur tinggi gambar sesuai kebutuhan */
+        object-fit: cover; /* Memastikan gambar terisi penuh tanpa merusak rasio */
+        border-radius: 50%; /* Membuat gambar berbentuk bulat */
+        }
+        
+        /* Gaya tombol play */
+        .play-button {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        background-color: #ffcc00;
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+        position: relative;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin: 20px auto 0; /* Jarak di bawah gambar */
+        }
+        
+        .play-button::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-style: solid;
+        border-width: 10px 0 10px 18px;
+        border-color: transparent transparent transparent #000;
+        }
+        
+        .play-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 25px rgba(255, 204, 0, 0.7);
+        }
+        
+        .play-button:active {
+        transform: scale(0.95);
+        }
+    </style>
+</head>
+<body><br><center><img src="poto.jpg" width="100px" height="100px" alt="loads...jpg"><br>
+
+
+         <!-- Tambahkan di bawah tag <img> dalam .contact-container -->
+         <div class="play-button" onclick="togglePlay()"></div>
+         <audio id="audio" src="lagu.mp3"></audio>
+         <br><p>Pencet tombol play untuk memutar lagu</p>
+         <div class="container">
+         
+        <h1>Welcome to My <span class="fly-left">Web</span><span class="fly-right">site</span></h1>
+        <p>Hello, My name is <a href="https://example.com" class="name-link">
+            <span class="char">P</span>
+            <span class="char">a</span>
+            <span class="char">c</span>
+            <span class="char">h</span>
+            <span class="char">r</span>
+            <span class="char">u</span>
+            <span class="char">d</span>
+            <span class="char">i</span>
+            <span class="char">n</span>
+            
+        </a><br> <p style="font-family: 'Times new roman', sans-serif;"><b>I'm an Electro Enthusiast and Smartphone Technician.<br>U can call me Udin or Mr. r45k1n, but up to you. <br>My fullname is<br> Hanuma Amruhu Pachrudin<br>U can call me Motherfucker Ass, hehe.</b></p>
+        <a href="#contact" class="btn">Learn More</a>
+    </div>
+    
+    <div id="contact" class="contact-container">
+        <h2>Contact Us</h2>
+        <div class="contact-info">
+            <a href="https://t.me/pachrudin" target="_blank" class="contact-item">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/telegram-app.png" alt="Telegram">
+                <span>Telegram</span>
+            </a>
+            <a href="https://instagram.com/ha_ap10" target="_blank" class="contact-item">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram">
+                <span>Instagram</span>
+            </a>
+            <a href="https://wa.me/083164322973" target="_blank" class="contact-item">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">
+                <span>WhatsApp</span>
+            </a>
+        </div>
+    </div>
+
+
+     <div class="projek">
+     <h1>Project</h1>
+     <img src="poto1.jpg" width="300px" height="300px"><br><br><br>
+     <img src="poto2.jpg" width="400px" height="400px"><br><br><br><br>
+     <img src="poto3.jpg" width="300px" height="300px"><br><br><br><br>
+     <img src="poto4.jpg" width="300px" height="300px"><br><br><br><br>
+     <img src="poto5.jpg" width="300px" height="300px"><br><br><br><br>
+     <img src="poto6.jpg" width="300px" height="300px"><br><br><br><br>
+     <img src="poto7.jpg" width="300px" height="300px"><br><br><br><br>
+     <img src="poto8.jpg" width="300px" height="300px"><br><br><br><br>
+     <img src="poto9.jpg" width="300px" height="300px"><br><br><br><br>
+     <img src="poto10.jpg" width="300px" height="300px"><br><br><br><br>
+     <img src="poto11.jpg" width="300px" height="300px"><br><br><br><br>
+     <img src="poto12.jpg" width="300px" height="300px"><br><br><br><br>
+     
+     </div>
+     
+     <footer style="text-align: center; padding: 20px; background-color: black; border-top: 1px solid #ddd;">
+     <p style="margin: 0; font-family: Arial, sans-serif; color: green;">
+     &copy; <span id="year"></span> <strong>Copyright © </strong>
+     </p>
+     <p style="margin: 0; font-size: 0.9em; color: #777;">
+     Di desain oleh <a href="https://www.designerwebsite.com" target="_blank" style="color: #007BFF; text-decoration: none;">Hanuma</a>
+     </p>
+     </footer>
+     
+     <script>
+     document.getElementById('year').textContent = new Date().getFullYear();
+     </script>
+    <script>
+        document.querySelector('.btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#contact').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+    </script>
+    
+    <script>
+    function togglePlay() {
+    const audio = document.getElementById('audio');
+    if (audio.paused) {
+    audio.play();
+    document.querySelector('.play-button').style.backgroundColor = '#ff6600'; // Ubah warna saat diputar
+    } else {
+    audio.pause();
+    document.querySelector('.play-button').style.backgroundColor = '#ffcc00'; // Kembali ke warna asli saat dihentikan
+    }
+    }
+    </script>
+    
+</body>
+</html>
+        </body>
+        </html>
