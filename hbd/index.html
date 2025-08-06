@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+    <title>Happy Birthday Yusfina Khoiriyah</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+      animation: gradientMove 10s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .container {
+      padding: 30px;
+      background: rga(255, 255, 255, 0.8);
+      background-image:url("bg.jpg");
+      border-radius: 25px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+      max-width: 420px;
+      transition: all 0.5s ease;
+    }
+    .hidden { display: none; }
+    bhutton {
+      padding: 12px 25px;
+      margin-top: 25px;
+      border: none;
+      border-radius: 15px;
+      background-color: ;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+      transition: backgrund-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #f50057;
+    }
+    img {
+      width: 220px;
+      margin-top: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .photo {
+      width: 150px;
+      margin: 15px auto 5px;
+      display: block;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .typing {
+      display: inline-block;
+      color:pink;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid;
+      animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: black }
+    }
+    .pop-in {
+      animation: popIn 0.6s ease forwards;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.2); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    audio { display: none; }
+    p{
+      color:white;
+      font-size:18px;
+    
+    }
+  </style>
+</head>
+<body>
+  <audio id="bg-music" loop>
+    <source src="musik.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>  <div class="container">
+    <div id="step1">
+      <img src="1.jpg" alt="Foto Cewek" class="photo" />
+      <h2 class="typing">hai kamu yang spesial 🎉</h2>
+      <p>aku punya sesuatu buat kamu...</p>
+      <bhutton onclick="nextStep(1)">💞񓐼</bhutton>
+       <p font-color="white"> tap lovenya yaa</p>
+    </div><div id="step2" class="hidden">
+  <img src="2.jpg" alt="Foto Cewek" class="photo" />
+  <h2 class="typing">hari ini hari yang penting banget...</h2>
+  <p>karena kamu hadir di dunia 💖</p>
+  <bhutton onclick="nextStep(2)">💞</button>
+  <p> tap lovenya yaa</p>
+</div>
+
+<div id="step3" class="hidden">
+  <img src="3.jpg" alt="Foto Cewek" class="photo" />
+  <h2 class="typing">selamat ulang tahun, sayang! 🥳</h2>
+  <p>semoga semua harapanmu terwujud 💫</p>
+  <bhutton onclick="nextStep(3)">💞</button>
+</div>
+
+<div id="step4" class="hidden">
+  <img src="4.jpg" alt="Foto Cewek" class="photo" />
+  <h3 class="typing">aku bersyukur banget ketemu kamu...</h2>
+  <p>semoga kita bisa terus bersama, apapun yang terjadi 💕</p>
+  <bhutton onclick="nextStep(4)">💞</button>
+</div>
+
+<div id="step5" class="hidden">
+  <img src="5.jpg" alt="Foto Cewek" class="photo" />
+  <h2 class="typing">emm mana kadonya:(</h2>
+  <p>klik aja ya kadonya 🎁</p>
+  <img src="kado.jpg" alt="Kado" onclick="showGift()" style="cursor:pointer; animation: pulse 1.5s infinite;" />
+</div>
+
+<div id="gift" class="hidden">
+  <p>taraa~ 😚 mentahan aja ya..</p>
+  <img src="bukti.png" alt="bukti Transfer" class="pop-in" />
+  <p>Aku transfer bukan cuma uang... tapi juga cinta & niat baik 💕</p>
+  <bhutton onclick="showWish()">Make a Wish ✨</button>
+</div>
+
+<div id="final" class="hidden">
+  <p>Kamu boleh make a wish sekarang 🌠</p>
+  <p>Jangan lupa doa yang indah yaa...</p>
+  <p>Terima kasih sudah jadi bagian hidupku 🥹</p>
+  <p>Semoga tahun ini lebih bahagia & kita makin dekat ke tujuan kita 🤲</p>
+  <p>I love you ❤️</p>
+</div>
+
+  </div>  <script>
+    const steps = ["step1", "step2", "step3", "step4", "step5", "gift", "final"];
+
+    function hideAllSteps() {
+      steps.forEach(id => document.getElementById(id).classList.add("hidden"));
+    }
+
+    function nextStep(step) {
+      hideAllSteps();
+      const nextId = step === 5 ? "gift" : `step${step + 1}`;
+      document.getElementById(nextId).classList.remove("hidden");
+
+      if (step === 1) {
+        const music = document.getElementById("bg-music");
+        music.play().catch(() => {});
+      }
+    }
+
+    function showGift() {
+      hideAllSteps();
+      document.getElementById("gift").classList.remove("hidden");
+    }
+
+    function showWish() {
+      hideAllSteps();
+      document.getElementById("final").classList.remove("hidden");
+    }
+  </script></body>
+</html>
