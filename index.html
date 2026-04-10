@@ -58,6 +58,44 @@ button {
     color: #22c55e;
     font-weight: bold;
 }
+
+/* OVERLAY */
+#tentangOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s;
+}
+
+/* BOX */
+#tentangBox {
+    width: 90%;
+    max-width: 400px;
+    background: rgba(30,41,59,0.9);
+    padding: 20px;
+    border-radius: 20px;
+    animation: slideUp 0.3s;
+}
+
+/* ANIMASI */
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+@keyframes slideUp {
+    from {transform: translateY(50px); opacity:0;}
+    to {transform: translateY(0); opacity:1;}
+}
+
+
+    
 </style>
 </head>
 
@@ -105,12 +143,57 @@ button {
 <button onclick="exportExcel()">Export Excel</button>
 <button onclick="exportPDF()">Export PDF</button>
 <button onclick="kirimWA()">Kirim ke WhatsApp</button>
-
+<button onclick="toggleTentang()">Tentang</button>
 </div>
+<div id="tentangOverlay" style="display:none;">
+    <div id="tentangBox">
+        <h2>👤 Tentang Saya</h2>
 
+        <p><b>Hanuma Amruhu</b></p>
+        <p>Owner - Majalengka Flasher</p>
+
+        <hr>
+
+        <h4>🛠️ Layanan</h4>
+        <ul>
+            <li>Perbaikan Ponsel</li>
+            <li>Project Elektronik</li>
+            <li>Pembuatan Website</li>
+            <li>Pembuatan Aplikasi</li>
+        </ul>
+
+        <hr>
+
+        <h4>💰 Donasi</h4>
+        <p>Dukung pengembangan 🙏</p>
+
+        <img src="qris.png" style="width:100%; border-radius:10px; margin-bottom:10px;">
+        <p><b>DANA:</b> 08xxxxxxxxxx</p>
+
+        <button onclick="hubungiWA()">Hubungi Saya</button>
+        <button class="hapus" onclick="toggleTentang()">Tutup</button>
+    </div>
+</div>
 </div>
 
 <script>
+
+    function toggleTentang(){
+    let overlay = document.getElementById("tentangOverlay");
+
+    if(overlay.style.display === "none"){
+        overlay.style.display = "flex";
+    } else {
+        overlay.style.display = "none";
+    }
+}
+
+function hubungiWA(){
+    let text = "Halo, saya tertarik dengan jasa Anda";
+    window.open("https://wa.me/628xxxxxxxxxx?text="+encodeURIComponent(text));
+}
+
+    
 const hargaPerCB = 1100;
 let data = [];
 let editIndex = null;
