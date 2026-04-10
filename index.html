@@ -306,6 +306,7 @@ function kirimWA(){
     data.forEach(d=>{
         text+=`📅 ${d.tanggal}
 👥 MPP: ${d.mpp}
+🗿 Nama : ${d.nama}
 🎯 Target: ${d.target}
 📊 Hasil: ${d.hasil}
 📈 Persen: ${d.persen.toFixed(1)}%
@@ -313,6 +314,10 @@ function kirimWA(){
 
 `;
     });
+
+    window.open("https://wa.me/085862797682?text="+encodeURIComponent(text));
+}
+
 
 
 // INIT
