@@ -303,10 +303,15 @@ function exportPDF(){
 function kirimWA(){
     let text="📊 *REKAP PIECE RATE*\n\n";
 
+    let totalGaji = 0;
+    let hariSet = new Set();
+
     data.forEach(d=>{
+        totalGaji += d.perOrang;
+        hariSet.add(d.tanggal);
+
         text+=`📅 ${d.tanggal}
 👥 MPP: ${d.mpp}
-🗿 Nama : ${d.nama}
 🎯 Target: ${d.target}
 📊 Hasil: ${d.hasil}
 📈 Persen: ${d.persen.toFixed(1)}%
@@ -314,6 +319,12 @@ function kirimWA(){
 
 `;
     });
+
+    // TAMBAHAN TOTAL
+    text+=`====================
+💰 *TOTAL GAJI*: ${rupiah(totalGaji)}
+📆 *TOTAL HARI KERJA*: ${hariSet.size} hari`;
+
 
     window.open("https://wa.me/6285862797682?text="+encodeURIComponent(text));
 }
