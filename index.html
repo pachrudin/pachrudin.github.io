@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Piece Rate Manager PRO</title>
+<title>SOS_Family</title>
 
 <style>
 body {
@@ -65,9 +65,8 @@ button {
 
 <div class="container">
 
-<h2>📊 Piece Rate Manager PRO</h2>
+<h2>📊 SOS Family Euy🗿</h2>
 
-<!-- FORM -->
 <div class="card" id="formInput">
 <h3>📥 Input Data Harian</h3>
 
@@ -90,7 +89,6 @@ button {
 <button id="btnUpdate" class="update" onclick="updateData()" style="display:none;">Update Data</button>
 </div>
 
-<!-- DATA -->
 <div class="card">
 <h3>📅 Rekap Harian</h3>
 <div id="listData"></div>
@@ -137,12 +135,17 @@ function namaFile(prefix){
     return prefix + "_" + now.toISOString().slice(0,10);
 }
 
+// 🔥 FIX ANDROID DOWNLOAD
 function downloadFile(content, filename, type){
     let blob = new Blob([content], { type });
     let a = document.createElement("a");
+
     a.href = URL.createObjectURL(blob);
     a.download = filename;
+
+    document.body.appendChild(a);
     a.click();
+    document.body.removeChild(a);
 }
 
 // CREATE
@@ -170,16 +173,13 @@ function tambahData(){
     clearForm();
 }
 
-// READ + SORT + TOTAL HARI
+// READ
 function tampilkan(){
     listData.innerHTML="";
     let total=0;
-
-    // SORT
-    data.sort((a,b)=> new Date(a.tanggal) - new Date(b.tanggal));
-
-    // HITUNG HARI UNIK
     let hariSet = new Set();
+
+    data.sort((a,b)=> new Date(a.tanggal) - new Date(b.tanggal));
 
     data.forEach((d,i)=>{
         total += d.perOrang;
@@ -261,18 +261,51 @@ function resetData(){
     }
 }
 
-// EXPORT & WA (tetap sama)
-function exportTXT(){ /* sama seperti sebelumnya */ }
-function exportCSV(){ /* sama */ }
-function exportExcel(){ /* sama */ }
-function exportPDF(){ /* sama */ }
+// EXPORT
+function exportTXT(){
+    if(data.length===0) return alert("Data kosong!");
+    let text="";
+    data.forEach(d=>{
+        text+=`${d.tanggal} - ${rupiah(d.perOrang)}\n`;
+    });
+    downloadFile(text, namaFile("rekap")+".txt", "text/plain");
+}
 
+function exportCSV(){
+    if(data.length===0) return alert("Data kosong!");
+    let csv="Tanggal,PerOrang\n";
+    data.forEach(d=>{
+        csv+=`${d.tanggal},${d.perOrang}\n`;
+    });
+    downloadFile(csv, namaFile("rekap")+".csv", "text/csv");
+}
+
+function exportExcel(){
+    let table="<table border='1'><tr><th>Tanggal</th><th>Gaji</th></tr>";
+    data.forEach(d=>{
+        table+=`<tr><td>${d.tanggal}</td><td>${d.perOrang}</td></tr>`;
+    });
+    table+="</table>";
+    downloadFile(table, namaFile("rekap")+".xls", "application/vnd.ms-excel");
+}
+
+function exportPDF(){
+    let html="<h3>Rekap Piece Rate</h3>";
+    data.forEach(d=>{
+        html+=`${d.tanggal} - ${rupiah(d.perOrang)}<br>`;
+    });
+    let w=window.open("");
+    w.document.write(html);
+    w.print();
+}
+
+// WA
 function kirimWA(){
     let text="📊 Rekap Piece Rate\n\n";
     data.forEach(d=>{
         text+=`${d.tanggal} - ${rupiah(d.perOrang)}\n`;
     });
-    window.open("https://wa.me/?text="+encodeURIComponent(text));
+    window.open("https://wa.me/085862797682?text="+encodeURIComponent(text));
 }
 
 // INIT
