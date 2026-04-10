@@ -301,12 +301,19 @@ function exportPDF(){
 
 // WA
 function kirimWA(){
-    let text="📊 Rekap Piece Rate\n\n";
+    let text="📊 *REKAP PIECE RATE*\n\n";
+
     data.forEach(d=>{
-        text+=`${d.tanggal} - ${rupiah(d.perOrang)}\n`;
+        text+=`📅 ${d.tanggal}
+👥 MPP: ${d.mpp}
+🎯 Target: ${d.target}
+📊 Hasil: ${d.hasil}
+📈 Persen: ${d.persen.toFixed(1)}%
+💰 Gaji/Orang: ${rupiah(d.perOrang)}
+
+`;
     });
-    window.open("https://wa.me/085862797682?text="+encodeURIComponent(text));
-}
+
 
 // INIT
 loadData();
