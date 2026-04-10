@@ -93,7 +93,29 @@ button {
     from {transform: translateY(50px); opacity:0;}
     to {transform: translateY(0); opacity:1;}
 }
+/* TOMBOL TENTANG PREMIUM */
+.tentangBtn {
+    width: 60%;
+    margin: 10px auto 0;
+    display: block;
+    background: linear-gradient(135deg, #38bdf8, #6366f1);
+    color: white;
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 999px;
+    box-shadow: 0 4px 15px rgba(99,102,241,0.4);
+}
 
+/* HOVER EFFECT */
+.tentangBtn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(56,189,248,0.6);
+}
+
+/* KLIK EFFECT */
+.tentangBtn:active {
+    transform: scale(0.95);
+}
 
     
 </style>
@@ -143,8 +165,10 @@ button {
 <button onclick="exportExcel()">Export Excel</button>
 <button onclick="exportPDF()">Export PDF</button>
 <button onclick="kirimWA()">Kirim ke WhatsApp</button>
-<button onclick="toggleTentang()">Tentang</button>
+    <button class="tentangBtn" onclick="toggleTentang()">ℹ️ Tentang</button>
 </div>
+
+    
 <div id="tentangOverlay" style="display:none;">
     <div id="tentangBox">
         <h2>👤 Tentang Saya</h2>
