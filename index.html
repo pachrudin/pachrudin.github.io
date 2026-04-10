@@ -79,7 +79,7 @@ button {
 <label>🎯 Target</label>
 <input type="number" id="target">
 
-<label>📊 Hasil</label>
+<label>📊 ACV</label>
 <input type="number" id="hasil">
 
 <label>📝 Nama MPP</label>
@@ -190,11 +190,11 @@ function tampilkan(){
         listData.innerHTML += `
         <div class="data">
         <b>${d.tanggal}</b><br>
-        MPP: ${d.mpp}<br>
+        JML MPP: ${d.mpp}<br>
         Target: ${d.target}<br>
-        Hasil: ${d.hasil}<br>
+        Acv: ${d.hasil}<br>
         <span style="color:${warna}">Persentase: ${d.persen.toFixed(1)}%</span><br>
-        Per Orang: ${rupiah(d.perOrang)}
+        Menerima: ${rupiah(d.perOrang)per-orang}
 
         <button class="edit" onclick="editData(${i})">✏️ Edit</button>
         <button class="hapus" onclick="hapus(${i})">Hapus</button>
