@@ -483,31 +483,120 @@ function resetData(){
 }
 
 // EXPORT
-function exportTXT(){
-    if(data.length===0) return alert("Data kosong!");
-    let text="";
-    data.forEach(d=>{
-        text+=`${d.tanggal} - ${rupiah(d.perOrang)}\n`;
+function exportTXT() {
+    if (data.length === 0) return alert("Data kosong!");
+
+    let text = "📊 REKAP PIECE RATE\n";
+    text += "============================\n\n";
+
+    let totalGaji = 0;
+    let hariSet = new Set();
+
+    data.forEach(d => {
+        totalGaji += Number(d.perOrang);
+        hariSet.add(d.tanggal);
+
+        text += `📅 Tanggal   : ${d.tanggal}\n`;
+        text += `👤 Nama      : ${d.nama}\n`;
+        text += `👥 MPP       : ${d.mpp}\n`;
+        text += `🎯 Target    : ${d.target}\n`;
+        text += `📊 Hasil     : ${d.hasil}\n`;
+        text += `📈 Persen    : ${d.persen.toFixed(1)}%\n`;
+        text += `💰 Gaji      : ${rupiah(d.perOrang)}\n`;
+        text += "----------------------------\n\n";
     });
-    downloadFile(text, namaFile("rekap")+".txt", "text/plain");
+
+    text += "============================\n";
+    text += `TOTAL HARI : ${hariSet.size}\n`;
+    text += `TOTAL GAJI : ${rupiah(totalGaji)}\n`;
+    text += "============================\n";
+
+    downloadFile(
+        text,
+        namaFile("rekap_piece_rate") + ".txt",
+        "text/plain"
+    );
 }
 
-function exportCSV(){
-    if(data.length===0) return alert("Data kosong!");
-    let csv="Tanggal,PerOrang\n";
-    data.forEach(d=>{
-        csv+=`${d.tanggal},${d.perOrang}\n`;
+function exportCSV() {
+    if (data.length === 0) return alert("Data kosong!");
+
+    let csv = "Tanggal,Nama,MPP,Target,Hasil,Persen,GajiPerOrang\n";
+
+    let totalGaji = 0;
+    let hariSet = new Set();
+
+    data.forEach(d => {
+        totalGaji += Number(d.perOrang);
+        hariSet.add(d.tanggal);
+
+        csv += `${d.tanggal},${d.nama},${d.mpp},${d.target},${d.hasil},${d.persen.toFixed(1)}%,${d.perOrang}\n`;
     });
-    downloadFile(csv, namaFile("rekap")+".csv", "text/csv");
+
+    // Tambahan ringkasan di bawah
+    csv += `\n`;
+    csv += `TOTAL HARI,${hariSet.size}\n`;
+    csv += `TOTAL GAJI,${totalGaji}\n`;
+
+    downloadFile(
+        csv,
+        namaFile("rekap_piece_rate") + ".csv",
+        "text/csv"
+    );
 }
 
-function exportExcel(){
-    let table="<table border='1'><tr><th>Tanggal</th><th>Gaji</th></tr>";
-    data.forEach(d=>{
-        table+=`<tr><td>${d.tanggal}</td><td>${d.perOrang}</td></tr>`;
+function exportExcel() {
+
+    let totalGaji = 0;
+    let hariSet = new Set();
+
+    let table = `
+    <table border="1">
+        <tr>
+            <th>Tanggal</th>
+            <th>Nama</th>
+            <th>MPP</th>
+            <th>Target</th>
+            <th>Hasil</th>
+            <th>Persen</th>
+            <th>Gaji/Orang</th>
+        </tr>
+    `;
+
+    data.forEach(d => {
+        totalGaji += Number(d.perOrang);
+        hariSet.add(d.tanggal);
+
+        table += `
+        <tr>
+            <td>${d.tanggal}</td>
+            <td>${d.nama}</td>
+            <td>${d.mpp}</td>
+            <td>${d.target}</td>
+            <td>${d.hasil}</td>
+            <td>${d.persen.toFixed(1)}%</td>
+            <td>${d.perOrang}</td>
+        </tr>
+        `;
     });
-    table+="</table>";
-    downloadFile(table, namaFile("rekap")+".xls", "application/vnd.ms-excel");
+
+    table += `
+        <tr>
+            <td colspan="6"><b>Total Gaji</b></td>
+            <td><b>${totalGaji}</b></td>
+        </tr>
+        <tr>
+            <td colspan="6"><b>Total Hari</b></td>
+            <td><b>${hariSet.size}</b></td>
+        </tr>
+    </table>
+    `;
+
+    downloadFile(
+        table,
+        namaFile("rekap_piece_rate") + ".xls",
+        "application/vnd.ms-excel"
+    );
 }
 
 function exportPDF() {
