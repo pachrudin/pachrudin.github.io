@@ -117,6 +117,33 @@ button {
     transform: scale(0.95);
 }
 
+    .qrisBox {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.qrisBox img {
+    width: 180px;
+    max-width: 80%;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    margin-bottom: 10px;
+}
+
+/* tombol bawah QR */
+.qrisBtnWrap {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.qrisBtnWrap button {
+    width: auto;
+    padding: 8px 12px;
+    font-size: 13px;
+    border-radius: 10px;
+    background: #334155;
+}
     
 </style>
 </head>
@@ -189,18 +216,46 @@ button {
         <hr>
 
         <h4>💰 Donasi</h4>
-        <p>Dukung pengembangan 🙏</p>
 
-        <img src="qris.png" style="width:100%; border-radius:10px; margin-bottom:10px;">
-        <p><b>DANA:</b> 08xxxxxxxxxx</p>
-
-        <button onclick="hubungiWA()">Hubungi Saya</button>
-        <button class="hapus" onclick="toggleTentang()">Tutup</button>
+<div class="qrisBox">
+    <img id="qrisImg" src="qris.png">
+    
+    <div class="qrisBtnWrap">
+        <button onclick="downloadQRIS()">⬇️ Download</button>
+        <button onclick="shareQRIS()">📤 Bagikan</button>
     </div>
+</div>
+
+<p>DANA: 08xxxxxxxxxx</p>
 </div>
 </div>
 
 <script>
+
+    // DOWNLOAD QRIS
+function downloadQRIS(){
+    let link = document.createElement("a");
+    link.href = document.getElementById("qrisImg").src;
+    link.download = "QRIS_Hanuma.png";
+    link.click();
+}
+
+// SHARE QRIS
+function shareQRIS(){
+    let url = document.getElementById("qrisImg").src;
+
+    if(navigator.share){
+        navigator.share({
+            title: "QRIS Hanuma",
+            text: "Scan untuk donasi 🙏",
+            url: url
+        });
+    } else {
+        // fallback ke WhatsApp
+        let text = "Scan QRIS ini untuk donasi 🙏\n" + url;
+        window.open("https://wa.me/?text=" + encodeURIComponent(text));
+    }
+}
 
     function toggleTentang(){
     let overlay = document.getElementById("tentangOverlay");
