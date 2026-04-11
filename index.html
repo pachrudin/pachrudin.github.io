@@ -73,16 +73,28 @@ button {
     animation: fadeIn 0.3s;
 }
 
-/* BOX */
 #tentangBox {
     width: 90%;
     max-width: 400px;
-    background: rgba(30,41,59,0.9);
+    max-height: 80vh; /* BATAS TINGGI */
+    overflow-y: auto; /* AKTIFKAN SCROLL */
+    background: #1e293b;
     padding: 20px;
     border-radius: 20px;
     animation: slideUp 0.3s;
 }
+/* SCROLLBAR KEREN */
+#tentangBox::-webkit-scrollbar {
+    width: 5px;
+}
 
+#tentangBox::-webkit-scrollbar-thumb {
+    background: #64748b;
+    border-radius: 10px;
+}
+    #tentangBox {
+    padding-bottom: 40px;
+    }
 /* ANIMASI */
 @keyframes fadeIn {
     from {opacity:0;}
