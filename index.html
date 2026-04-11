@@ -266,7 +266,7 @@ button {
 <h4>🛠️ Menerima Jasa</h4>
 <ul>
 <li>Service HP dan Komputer</li>
-<li>Project DIY Elektronic</li>
+<li>Project DIY Electronic</li>
 <li>Pembuatan Website</li>
 <li>Pembuatan Aplikasi Android</li>
 </ul>
@@ -510,13 +510,66 @@ function exportExcel(){
     downloadFile(table, namaFile("rekap")+".xls", "application/vnd.ms-excel");
 }
 
-function exportPDF(){
-    let html="<h3>Rekap Piece Rate</h3>";
-    data.forEach(d=>{
-        html+=`${d.tanggal} - ${rupiah(d.perOrang)}<br>`;
+function exportPDF() {
+
+    let totalGaji = 0;
+    let hariSet = new Set();
+
+    let text = `
+    <html>
+    <head>
+        <title>Rekap Piece Rate</title>
+        <style>
+            body{
+                font-family: Arial;
+                padding: 20px;
+                background: #fff;
+            }
+            .box{
+                white-space: pre-wrap;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+            h2{
+                text-align:center;
+            }
+        </style>
+    </head>
+    <body>
+
+    <h2>📊 REKAP PIECE RATE</h2>
+    <div class="box">
+`;
+
+    data.forEach(d => {
+        totalGaji += Number(d.perOrang);
+        hariSet.add(d.tanggal);
+
+        text += `
+📅 ${d.tanggal}
+👥 Total MPP: ${d.mpp}
+🗿 Nama : ${d.nama}
+🎯 Target: ${d.target}
+📊 Hasil: ${d.hasil}
+📈 Persen: ${d.persen.toFixed(1)}%
+💰 Gaji/Orang: ${rupiah(d.perOrang)}
+
+----------------------------
+`;
     });
-    let w=window.open("");
-    w.document.write(html);
+
+    text += `
+Total Hari: ${hariSet.size}
+Total Gaji: ${rupiah(totalGaji)}
+
+    </div>
+    </body>
+    </html>
+    `;
+
+    let w = window.open("");
+    w.document.write(text);
+    w.document.close();
     w.print();
 }
 
