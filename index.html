@@ -60,17 +60,15 @@ button {
 }
 
 /* OVERLAY */
+
+/* MODAL */
 #tentangOverlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top:0;left:0;right:0;bottom:0;
     background: rgba(0,0,0,0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: fadeIn 0.3s;
+    display:none;
+    justify-content:center;
+    align-items:center;
 }
 
 #tentangBox {
@@ -80,6 +78,15 @@ button {
     overflow-y: auto;
     padding: 20px;
     border-radius: 20px;
+    background: linear-gradient(180deg, #ffffff, #f1f5f9);
+    color: #0f172a;
+    position: relative;
+}
+
+/* scroll */
+#tentangBox::-webkit-scrollbar { width: 5px; }
+#tentangBox::-webkit-scrollbar-thumb { background: #94a3b8; }
+
 
     /* BACKGROUND PUTIH + GRADIENT HALUS */
     background: linear-gradient(180deg, #ffffff, #f1f5f9);
@@ -243,40 +250,40 @@ button {
     <button class="tentangBtn" onclick="toggleTentang()">ℹ️ Tentang</button>
 </div>
 
+
+<!-- MODAL -->
+<div id="tentangOverlay">
 <div id="tentangBox">
 
-<button class="closeBtn" onclick="toggleTentang()">✖</button></div>
+<button class="closeBtn" onclick="toggleTentang()">✖</button>
 
 <h3>👤 Tentang Saya</h3>
+<p><b>Hanuma Amruhu</b></p>
+<p>Majalengka Flasher</p>
 
-        <p><b>Hanuma Amruhu</b></p>
-        <p>Owner - Majalengka Flasher</p>
+<h4>🛠️ Layanan</h4>
+<ul>
+<li>Perbaikan Ponsel</li>
+<li>Project Elektronik</li>
+<li>Website</li>
+<li>Aplikasi Android</li>
+</ul>
 
-        <hr>
-
-        <h4>🛠️ Layanan</h4>
-        <ul>
-            <li>Perbaikan Ponsel</li>
-            <li>Project Elektronik</li>
-            <li>Pembuatan Website</li>
-            <li>Pembuatan Aplikasi</li>
-        </ul>
-
-        <hr>
-
-        <h4>💰 Donasi</h4>
+<h4>💰 Donate untuk permen Kopiko🤤</h4>
 
 <div class="qrisBox">
-    <img id="qrisImg" src="qris.png">
-    
-    <div class="qrisBtnWrap">
-        <button onclick="downloadQRIS()">⬇️ Download</button>
-        <button onclick="shareQRIS()">📤 Bagikan</button>
-    </div>
+<img id="qrisImg" src="qris.png">
+
+<div class="qrisBtnWrap">
+<button onclick="downloadQRIS()">Download</button>
+<button onclick="shareQRIS()">Bagikan</button>
+</div>
 </div>
 
-<p>DANA: 08xxxxxxxxxx</p>
-</div>
+<p>DANA: 083164322973 /a.n Hanuma AP</p>
+
+<button onclick="hubungiWA()">Hubungi Saya</button>
+
 </div>
 
 <script>
@@ -296,13 +303,13 @@ function shareQRIS(){
     if(navigator.share){
         navigator.share({
             title: "QRIS Hanuma",
-            text: "Scan untuk donasi 🙏",
+            text: "Scan for donate",
             url: url
         });
     } else {
         // fallback ke WhatsApp
-        let text = "Scan QRIS ini untuk donasi 🙏\n" + url;
-        window.open("https://wa.me/?text=" + encodeURIComponent(text));
+        let text = "Scan QRIS for donate🗿\n" + url;
+        window.open("https://wa.me/6285862797682?text=" + encodeURIComponent(text));
     }
 }
 
@@ -318,7 +325,7 @@ function shareQRIS(){
 
 function hubungiWA(){
     let text = "Halo, saya tertarik dengan jasa Anda";
-    window.open("https://wa.me/628xxxxxxxxxx?text="+encodeURIComponent(text));
+    window.open("https://wa.me/6285862797682?text="+encodeURIComponent(text));
 }
 
     
@@ -404,6 +411,7 @@ function tampilkan(){
         JML MPP: ${d.mpp}<br>
         Target: ${d.target}<br>
         Acv: ${d.hasil}<br>
+        Per CB : 1100<br>
         <span style="color:${warna}">Persentase: ${d.persen.toFixed(1)}%</span><br>
         Menerima: ${rupiah(d.perOrang)}
 
