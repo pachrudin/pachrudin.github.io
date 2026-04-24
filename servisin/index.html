@@ -3,68 +3,163 @@
 <head>
   <title>Majalengka Flasher - Tracking</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    h2 { animation: fadeInDown 1s; }
+
+    input {
+      padding: 12px;
+      width: 80%;
+      max-width: 300px;
+      border-radius: 10px;
+      border: none;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      background: #00c6ff;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      background: #0072ff;
+    }
+
+    .card {
+      margin-top: 20px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: left;
+      animation: fadeInUp 0.8s;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .status {
+      font-weight: bold;
+      animation: pulse 1.5s infinite;
+    }
+
+    .progress-bg {
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 12px;
+      border-radius: 10px;
+      transition: width 1.2s ease;
+    }
+
+    /* LOADING */
+    .loader {
+      margin-top: 20px;
+      border: 5px solid rgba(255,255,255,0.2);
+      border-top: 5px solid #00c6ff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes fadeInDown {
+      from {opacity: 0; transform: translateY(-30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes pulse {
+      0% {opacity: 1;}
+      50% {opacity: 0.6;}
+      100% {opacity: 1;}
+    }
+  </style>
 </head>
 
-<body style="font-family:sans-serif; background:#f5f5f5; text-align:center; padding:20px;">
+<body>
 
 <h2>🔧 Majalengka Flasher</h2>
 <p>Cek Status Servis HP</p>
 
-<input type="text" id="id" placeholder="Masukkan ID Servis"
-style="padding:12px; width:80%; max-width:300px; border-radius:10px; border:1px solid #ccc;"><br><br>
+<input type="text" id="id" placeholder="Masukkan ID Servis"><br>
+<button onclick="cek()">Cek Status</button>
 
-<button onclick="cek()" style="padding:10px 20px; border:none; border-radius:10px; background:#007bff; color:white;">
-Cek Status
-</button>
+<div id="hasil"></div>
 
-<div id="hasil" style="margin-top:20px;"></div>
+<!-- SOUND -->
+<audio id="notif">
+  <source src="https://www.soundjay.com/buttons/sounds/button-3.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 const URL = "https://clzqdgirahjvcyfcsdrc.supabase.co";
 const KEY = "sb_publishable_E66CBIfbpUHpObxCKojMiw_ymAywRw8";
 
-// WARNA STATUS
-function warnaStatus(status){
-  status = status.toLowerCase();
-
-  if(status.includes("selesai")) return "green";
-  if(status.includes("proses")) return "orange";
-  if(status.includes("sparepart")) return "purple";
-  if(status.includes("diagnosa")) return "blue";
-  if(status.includes("diterima")) return "gray";
-
-  return "#007bff";
+function warna(s){
+  s = s.toLowerCase();
+  if(s.includes("selesai")) return "#00ff88";
+  if(s.includes("proses")) return "#ffaa00";
+  if(s.includes("sparepart")) return "#bb66ff";
+  if(s.includes("diagnosa")) return "#00c6ff";
+  if(s.includes("diterima")) return "#cccccc";
+  return "#00c6ff";
 }
 
-// PROGRESS
-function progress(status){
-  status = status.toLowerCase();
-
-  if(status.includes("diterima")) return 10;
-  if(status.includes("diagnosa")) return 25;
-  if(status.includes("proses")) return 50;
-  if(status.includes("sparepart")) return 75;
-  if(status.includes("selesai")) return 100;
-
+function persen(s){
+  s = s.toLowerCase();
+  if(s.includes("diterima")) return 10;
+  if(s.includes("diagnosa")) return 25;
+  if(s.includes("proses")) return 50;
+  if(s.includes("sparepart")) return 75;
+  if(s.includes("selesai")) return 100;
   return 20;
 }
 
-// ICON STATUS
-function iconStatus(status){
-  status = status.toLowerCase();
-
-  if(status.includes("diterima")) return "📥";
-  if(status.includes("diagnosa")) return "🔍";
-  if(status.includes("proses")) return "🔧";
-  if(status.includes("sparepart")) return "📦";
-  if(status.includes("selesai")) return "✅";
-
+function icon(s){
+  s = s.toLowerCase();
+  if(s.includes("diterima")) return "📥";
+  if(s.includes("diagnosa")) return "🔍";
+  if(s.includes("proses")) return "🔧";
+  if(s.includes("sparepart")) return "📦";
+  if(s.includes("selesai")) return "✅";
   return "ℹ️";
 }
 
-// CEK DATA
 async function cek(){
   let id = document.getElementById("id").value;
+
+  // LOADING
+  document.getElementById("hasil").innerHTML = `<div class="loader"></div>`;
 
   let res = await fetch(URL + "/rest/v1/servis?id=eq." + id, {
     headers: {
@@ -77,47 +172,48 @@ async function cek(){
 
   if(data.length > 0){
     let d = data[0];
-
-    let warna = warnaStatus(d.status);
-    let persen = progress(d.status);
-    let icon = iconStatus(d.status);
+    let w = warna(d.status);
+    let p = persen(d.status);
+    let i = icon(d.status);
 
     document.getElementById("hasil").innerHTML = `
-    <div style="background:white; padding:20px; border-radius:15px; box-shadow:0 0 10px rgba(0,0,0,0.1); text-align:left;">
-      
-      <h3>${icon} ID: ${d.id}</h3>
+    <div class="card">
+      <h3>${i} ID: ${d.id}</h3>
       <p><b>Nama:</b> ${d.nama}</p>
       <p><b>HP:</b> ${d.tipe_hp}</p>
       <p><b>Keluhan:</b> ${d.keluhan}</p>
 
       <p><b>Status:</b> 
-        <span style="color:${warna}; font-weight:bold;">
+        <span class="status" style="color:${w}">
           ${d.status}
         </span>
       </p>
 
-      <div style="background:#ddd; border-radius:10px; overflow:hidden;">
-        <div id="bar" style="width:0%; background:${warna}; padding:8px; transition:width 1s;"></div>
+      <div class="progress-bg">
+        <div id="bar" class="progress-bar" style="background:${w}"></div>
       </div>
 
-      <p style="font-size:12px;">Progress: <span id="persen">0</span>%</p>
-
+      <p>Progress: <span id="num">0</span>%</p>
     </div>
     `;
 
-    // ANIMASI
-    setTimeout(() => {
-      document.getElementById("bar").style.width = persen + "%";
+    setTimeout(()=>{
+      document.getElementById("bar").style.width = p + "%";
 
       let count = 0;
-      let interval = setInterval(() => {
-        if(count >= persen){
+      let interval = setInterval(()=>{
+        if(count >= p){
           clearInterval(interval);
         } else {
           count++;
-          document.getElementById("persen").innerText = count;
+          document.getElementById("num").innerText = count;
         }
       }, 10);
+
+      // 🔔 SOUND SAAT SELESAI
+      if(p === 100){
+        document.getElementById("notif").play();
+      }
 
     }, 200);
 
