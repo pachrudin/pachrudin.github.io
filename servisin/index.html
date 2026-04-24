@@ -1,25 +1,49 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tracking Servis HP</title>
+  <title>Majalengka Flasher - Tracking</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body style="font-family:sans-serif; text-align:center; padding:20px;">
+<body style="font-family:sans-serif; background:#f5f5f5; text-align:center; padding:20px;">
 
-<h2>🔧 Tracking Servis HP</h2>
+<h2>🔧 Majalengka Flasher</h2>
+<p>Cek Status Servis HP</p>
 
 <input type="text" id="id" placeholder="Masukkan ID Servis"
-style="padding:10px; width:80%; max-width:300px;"><br><br>
+style="padding:12px; width:80%; max-width:300px; border-radius:10px; border:1px solid #ccc;"><br><br>
 
-<button onclick="cek()" style="padding:10px 20px;">Cek Status</button>
+<button onclick="cek()" style="padding:10px 20px; border:none; border-radius:10px; background:#007bff; color:white;">
+Cek Status
+</button>
 
 <div id="hasil" style="margin-top:20px;"></div>
 
 <script>
 const URL = "https://clzqdgirahjvcyfcsdrc.supabase.co";
 const KEY = "sb_publishable_E66CBIfbpUHpObxCKojMiw_ymAywRw8";
+
+function warnaStatus(status){
+  status = status.toLowerCase();
+
+  if(status.includes("selesai")) return "green";
+  if(status.includes("proses")) return "orange";
+  if(status.includes("sparepart")) return "purple";
+  if(status.includes("menunggu")) return "gray";
+
+  return "blue";
+}
+
+function progress(status){
+  status = status.toLowerCase();
+
+  if(status.includes("diterima")) return 20;
+  if(status.includes("proses")) return 50;
+  if(status.includes("sparepart")) return 70;
+  if(status.includes("selesai")) return 100;
+
+  return 30;
+}
 
 async function cek(){
   let id = document.getElementById("id").value;
@@ -36,14 +60,33 @@ async function cek(){
   if(data.length > 0){
     let d = data[0];
 
+    let warna = warnaStatus(d.status);
+    let persen = progress(d.status);
+
     document.getElementById("hasil").innerHTML = `
+    <div style="background:white; padding:20px; border-radius:15px; box-shadow:0 0 10px rgba(0,0,0,0.1); text-align:left;">
+      
+      <h3>ID: ${d.id}</h3>
       <p><b>Nama:</b> ${d.nama}</p>
       <p><b>HP:</b> ${d.tipe_hp}</p>
       <p><b>Keluhan:</b> ${d.keluhan}</p>
-      <p><b>Status:</b> ${d.status}</p>
+
+      <p><b>Status:</b> 
+        <span style="color:${warna}; font-weight:bold;">
+          ${d.status}
+        </span>
+      </p>
+
+      <div style="background:#ddd; border-radius:10px; overflow:hidden;">
+        <div style="width:${persen}%; background:${warna}; padding:8px;"></div>
+      </div>
+
+      <p style="font-size:12px;">Progress: ${persen}%</p>
+
+    </div>
     `;
   } else {
-    document.getElementById("hasil").innerHTML = "❌ Data tidak ditemukan";
+    document.getElementById("hasil").innerHTML = "❌ ID tidak ditemukan";
   }
 }
 </script>
