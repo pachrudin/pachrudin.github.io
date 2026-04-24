@@ -1,1 +1,52 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tracking Servis HP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="font-family:sans-serif; text-align:center; padding:20px;">
+
+<h2>🔧 Tracking Servis HP</h2>
+
+<input type="text" id="id" placeholder="Masukkan ID Servis"
+style="padding:10px; width:80%; max-width:300px;"><br><br>
+
+<button onclick="cek()" style="padding:10px 20px;">Cek Status</button>
+
+<div id="hasil" style="margin-top:20px;"></div>
+
+<script>
+const URL = "https://clzqdgirahjvcyfcsdrc.supabase.co";
+const KEY = "sb_publishable_E66CBIfbpUHpObxCKojMiw_ymAywRw8";
+
+async function cek(){
+  let id = document.getElementById("id").value;
+
+  let res = await fetch(URL + "/rest/v1/servis?id=eq." + id, {
+    headers: {
+      "apikey": KEY,
+      "Authorization": "Bearer " + KEY
+    }
+  });
+
+  let data = await res.json();
+
+  if(data.length > 0){
+    let d = data[0];
+
+    document.getElementById("hasil").innerHTML = `
+      <p><b>Nama:</b> ${d.nama}</p>
+      <p><b>HP:</b> ${d.tipe_hp}</p>
+      <p><b>Keluhan:</b> ${d.keluhan}</p>
+      <p><b>Status:</b> ${d.status}</p>
+    `;
+  } else {
+    document.getElementById("hasil").innerHTML = "❌ Data tidak ditemukan";
+  }
+}
+</script>
+
+</body>
+</html>
