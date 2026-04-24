@@ -23,28 +23,46 @@ Cek Status
 const URL = "https://clzqdgirahjvcyfcsdrc.supabase.co";
 const KEY = "sb_publishable_E66CBIfbpUHpObxCKojMiw_ymAywRw8";
 
+// WARNA STATUS
 function warnaStatus(status){
   status = status.toLowerCase();
 
   if(status.includes("selesai")) return "green";
   if(status.includes("proses")) return "orange";
   if(status.includes("sparepart")) return "purple";
-  if(status.includes("menunggu")) return "gray";
+  if(status.includes("diagnosa")) return "blue";
+  if(status.includes("diterima")) return "gray";
 
-  return "blue";
+  return "#007bff";
 }
 
+// PROGRESS
 function progress(status){
   status = status.toLowerCase();
 
-  if(status.includes("diterima")) return 20;
+  if(status.includes("diterima")) return 10;
+  if(status.includes("diagnosa")) return 25;
   if(status.includes("proses")) return 50;
-  if(status.includes("sparepart")) return 70;
+  if(status.includes("sparepart")) return 75;
   if(status.includes("selesai")) return 100;
 
-  return 30;
+  return 20;
 }
 
+// ICON STATUS
+function iconStatus(status){
+  status = status.toLowerCase();
+
+  if(status.includes("diterima")) return "📥";
+  if(status.includes("diagnosa")) return "🔍";
+  if(status.includes("proses")) return "🔧";
+  if(status.includes("sparepart")) return "📦";
+  if(status.includes("selesai")) return "✅";
+
+  return "ℹ️";
+}
+
+// CEK DATA
 async function cek(){
   let id = document.getElementById("id").value;
 
@@ -62,11 +80,12 @@ async function cek(){
 
     let warna = warnaStatus(d.status);
     let persen = progress(d.status);
+    let icon = iconStatus(d.status);
 
     document.getElementById("hasil").innerHTML = `
     <div style="background:white; padding:20px; border-radius:15px; box-shadow:0 0 10px rgba(0,0,0,0.1); text-align:left;">
       
-      <h3>ID: ${d.id}</h3>
+      <h3>${icon} ID: ${d.id}</h3>
       <p><b>Nama:</b> ${d.nama}</p>
       <p><b>HP:</b> ${d.tipe_hp}</p>
       <p><b>Keluhan:</b> ${d.keluhan}</p>
@@ -78,13 +97,30 @@ async function cek(){
       </p>
 
       <div style="background:#ddd; border-radius:10px; overflow:hidden;">
-        <div style="width:${persen}%; background:${warna}; padding:8px;"></div>
+        <div id="bar" style="width:0%; background:${warna}; padding:8px; transition:width 1s;"></div>
       </div>
 
-      <p style="font-size:12px;">Progress: ${persen}%</p>
+      <p style="font-size:12px;">Progress: <span id="persen">0</span>%</p>
 
     </div>
     `;
+
+    // ANIMASI
+    setTimeout(() => {
+      document.getElementById("bar").style.width = persen + "%";
+
+      let count = 0;
+      let interval = setInterval(() => {
+        if(count >= persen){
+          clearInterval(interval);
+        } else {
+          count++;
+          document.getElementById("persen").innerText = count;
+        }
+      }, 10);
+
+    }, 200);
+
   } else {
     document.getElementById("hasil").innerHTML = "❌ ID tidak ditemukan";
   }
