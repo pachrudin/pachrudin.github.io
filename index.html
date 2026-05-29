@@ -12,35 +12,26 @@ body {
     color: white;
     padding: 15px;
 }
-
-.container {
-    max-width: 500px;
-    margin: auto;
-}
-
+.container { max-width: 500px; margin: auto; }
 .card {
     background: #1e293b;
     padding: 15px;
     border-radius: 15px;
     margin-bottom: 15px;
 }
-
 label {
     margin-top: 10px;
     display: block;
     font-weight: bold;
     color: #94a3b8;
 }
-
 input, textarea {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
     border-radius: 10px;
     border: none;
-    box-sizing: border-box;
 }
-
 button {
     width: 100%;
     padding: 12px;
@@ -49,13 +40,7 @@ button {
     border: none;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.2s;
 }
-
-button:hover{
-    opacity: 0.9;
-}
-
 .tambah { background: #22c55e; }
 .update { background: #f59e0b; }
 .hapus { background: #ef4444; }
@@ -67,7 +52,6 @@ button:hover{
     border-radius: 10px;
     margin-top: 10px;
 }
-
 .total {
     font-size: 18px;
     margin-top: 10px;
@@ -75,86 +59,77 @@ button:hover{
     font-weight: bold;
 }
 
-/* ========================= */
-/* MODAL TENTANG */
-/* ========================= */
+/* OVERLAY */
 
-#tentangOverlay{
+/* MODAL */
+#tentangOverlay {
     position: fixed;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-
+    top:0;left:0;right:0;bottom:0;
     background: rgba(0,0,0,0.7);
-
     display:none;
-
     justify-content:center;
     align-items:center;
-
-    z-index:9999;
-
-    animation: fadeIn 0.25s;
 }
-
-#tentangBox{
-    width:90%;
-    max-width:400px;
-    max-height:80vh;
-
-    overflow-y:auto;
-
-    padding:20px;
-    padding-bottom:40px;
-
-    border-radius:20px;
-
-    background: linear-gradient(180deg,#ffffff,#f1f5f9);
-
-    color:#0f172a;
-
-    position:relative;
-
+#tentangBox {
+    width: 90%;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #ffffff, #f1f5f9);
+    color: #0f172a;
+    position: relative;
     animation: slideUp 0.3s;
 }
 
-#tentangBox h3,
-#tentangBox h4{
-    color:#0f172a;
+/* scroll */
+#tentangBox::-webkit-scrollbar { width: 5px; }
+#tentangBox::-webkit-scrollbar-thumb { background: #94a3b8; }
+
+
+    /* BACKGROUND PUTIH + GRADIENT HALUS */
+    background: linear-gradient(180deg, #ffffff, #f1f5f9);
+
+    color: #0f172a; /* teks jadi gelap biar kebaca */
+
+    animation: slideUp 0.3s;
+    position: relative;
 }
 
-#tentangBox p,
-#tentangBox li{
-    color:#334155;
+    #tentangBox h3, 
+#tentangBox h4 {
+    color: #0f172a;
 }
 
-#tentangBox::-webkit-scrollbar{
-    width:5px;
+#tentangBox p, 
+#tentangBox li {
+    color: #334155;
+}
+    
+/* SCROLLBAR KEREN */
+#tentangBox::-webkit-scrollbar {
+    width: 5px;
 }
 
-#tentangBox::-webkit-scrollbar-thumb{
-    background:#64748b;
-    border-radius:10px;
+#tentangBox::-webkit-scrollbar-thumb {
+    background: #64748b;
+    border-radius: 10px;
 }
-
-@keyframes fadeIn{
-    from{opacity:0;}
-    to{opacity:1;}
-}
-
-@keyframes slideUp{
-    from{
-        transform:translateY(50px);
-        opacity:0;
+    #tentangBox {
+    padding-bottom: 40px;
     }
-    to{
-        transform:translateY(0);
-        opacity:1;
-    }
+/* ANIMASI */
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
 }
 
-/* TOMBOL TENTANG */
+@keyframes slideUp {
+    from {transform: translateY(50px); opacity:0;}
+    to {transform: translateY(0); opacity:1;}
+}
+/* TOMBOL TENTANG PREMIUM */
 .tentangBtn {
     width: 60%;
     margin: 10px auto 0;
@@ -167,12 +142,18 @@ button:hover{
     box-shadow: 0 4px 15px rgba(99,102,241,0.4);
 }
 
+/* HOVER EFFECT */
 .tentangBtn:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(56,189,248,0.6);
 }
 
-/* QRIS */
-.qrisBox {
+/* KLIK EFFECT */
+.tentangBtn:active {
+    transform: scale(0.95);
+}
+
+    .qrisBox {
     text-align: center;
     margin-top: 10px;
 }
@@ -185,6 +166,7 @@ button:hover{
     margin-bottom: 10px;
 }
 
+/* tombol bawah QR */
 .qrisBtnWrap {
     display: flex;
     gap: 10px;
@@ -197,32 +179,27 @@ button:hover{
     font-size: 13px;
     border-radius: 10px;
     background: #334155;
-    color: white;
 }
 
-/* CLOSE BUTTON */
-.closeBtn {
+    .closeBtn {
     position: absolute;
     top: 10px;
     right: 10px;
-
     width: 35px;
     height: 35px;
-
     border-radius: 50%;
-
     background: #e2e8f0;
     color: #0f172a;
-
     font-size: 16px;
     font-weight: bold;
-
     border: none;
 }
 
 .closeBtn:hover {
-    background: #cbd5e1;
+    background: #cbd5f5;
+    transform: scale(1.1);
 }
+    
 </style>
 </head>
 
@@ -233,7 +210,6 @@ button:hover{
 <h2>📊 SOS Family Euy🗿</h2>
 
 <div class="card" id="formInput">
-
 <h3>📥 Input Data Harian</h3>
 
 <label>📅 Tanggal</label>
@@ -252,17 +228,11 @@ button:hover{
 <textarea id="nama"></textarea>
 
 <button id="btnTambah" class="tambah" onclick="tambahData()">Tambah Data</button>
-
-<button id="btnUpdate" class="update" onclick="updateData()" style="display:none;">
-Update Data
-</button>
-
+<button id="btnUpdate" class="update" onclick="updateData()" style="display:none;">Update Data</button>
 </div>
 
 <div class="card">
-
 <h3>📅 Rekap Harian</h3>
-
 <div id="listData"></div>
 
 <div class="total" id="totalSemua"></div>
@@ -277,38 +247,23 @@ Update Data
 <button onclick="exportExcel()">Export Excel</button>
 <button onclick="exportPDF()">Export PDF</button>
 <button onclick="kirimWA()">Kirim ke WhatsApp</button>
-
-<button class="tentangBtn" onclick="toggleTentang()">
-ℹ️ Tentang
-</button>
-
+    <button class="tentangBtn" onclick="toggleTentang()">ℹ️ Tentang</button>
 </div>
 
-</div>
 
 <!-- MODAL -->
 <div id="tentangOverlay">
-
 <div id="tentangBox">
 
 <button class="closeBtn" onclick="toggleTentang()">✖</button>
-
-<h3>📱 Tentang Aplikasi</h3>
-
-<p>
-Aplikasi ini berguna untuk merekap Gaji sistem
-<b>Piece Rate</b>.
-Cukup masukkan beberapa input saja,
-nanti data otomatis tersimpan dan terjumlah.
-</p>
-
+<h3> 📱 Tentang Aplikasi</h3>
+    <p> Aplikasi ini berguna untuk merekap Gaji sistim <b>Piece Rate</b> Yang mana
+    Kalian dibayar dari hasil output yang dikerjakan, Jadi dengan Aplikasi ini Cukup masukan Beberapa inputan saja, Nanti datanya bisa disimpan dan Automatis terjumlah. Dan bisa dijadiin Data untuk Komplain Gaji jika Gaji yang diberikan tidak Sesuai... WASSALAM!</p>
 <h3>👤 Tentang Saya</h3>
-
 <p><b>Hanuma Amruhu</b></p>
 <p>Majalengka Flasher</p>
 
 <h4>🛠️ Menerima Jasa</h4>
-
 <ul>
 <li>Service HP dan Komputer</li>
 <li>Project DIY Electronic</li>
@@ -319,143 +274,100 @@ nanti data otomatis tersimpan dan terjumlah.
 <h4>💰 Donate untuk permen Kopiko🤤</h4>
 
 <div class="qrisBox">
-
 <img id="qrisImg" src="qris.png">
 
 <div class="qrisBtnWrap">
 <button onclick="downloadQRIS()">Download</button>
 <button onclick="shareQRIS()">Bagikan</button>
 </div>
-
 </div>
 
-<p><b>DANA: 083164322973 / a.n Hanuma AP</b></p>
+<p><b>DANA: 083164322973 /a.n Hanuma AP</b></p>
 
 <button onclick="hubungiWA()">Hubungi Saya</button>
 
 </div>
-</div>
 
 <script>
 
-/* ========================= */
-/* TENTANG POPUP */
-/* ========================= */
-
-function toggleTentang(){
-
-    const overlay =
-    document.getElementById("tentangOverlay");
-
-    if(
-        window.getComputedStyle(overlay).display === "none"
-    ){
-        overlay.style.display = "flex";
-    }else{
-        overlay.style.display = "none";
-    }
-}
-
-/* Klik area hitam untuk close */
-document.getElementById("tentangOverlay")
-.addEventListener("click", function(e){
-
-    if(e.target.id === "tentangOverlay"){
-        this.style.display = "none";
-    }
-
-});
-
-/* ========================= */
-/* QRIS */
-/* ========================= */
-
+    // DOWNLOAD QRIS
 function downloadQRIS(){
-
     let link = document.createElement("a");
-
-    link.href =
-    document.getElementById("qrisImg").src;
-
+    link.href = document.getElementById("qrisImg").src;
     link.download = "QRIS_Hanuma.png";
-
     link.click();
 }
 
+// SHARE QRIS
 function shareQRIS(){
-
-    let url =
-    document.getElementById("qrisImg").src;
+    let url = document.getElementById("qrisImg").src;
 
     if(navigator.share){
-
         navigator.share({
             title: "QRIS Hanuma",
-            text: "Scan QRIS untuk donate🗿",
+            text: "Scan for donate",
             url: url
         });
-
     } else {
-
-        let text =
-        "Scan QRIS untuk donate🗿\n" + url;
-
-        window.open(
-        "https://wa.me/6285862797682?text="
-        + encodeURIComponent(text));
-
+        // fallback ke WhatsApp
+        let text = "Scan QRIS for donate🗿\n" + url;
+        window.open("https://wa.me/6285862797682?text=" + encodeURIComponent(text));
     }
 }
 
-function hubungiWA(){
+    function toggleTentang(){
+    const overlay = document.getElementById("tentangOverlay");
 
-    let text =
-    "Halo, saya tertarik dengan jasa Anda";
-
-    window.open(
-    "https://wa.me/6285862797682?text="
-    + encodeURIComponent(text));
+    overlay.style.display =
+        overlay.style.display === "flex" ? "none" : "flex";
+}
 }
 
-/* ========================= */
-/* DATA */
-/* ========================= */
+function hubungiWA(){
+    let text = "Halo, saya tertarik dengan jasa Anda";
+    window.open("https://wa.me/6285862797682?text="+encodeURIComponent(text));
+}
 
+    
 const hargaPerCB = 1100;
-
 let data = [];
-
 let editIndex = null;
 
 function loadData(){
-    data =
-    JSON.parse(localStorage.getItem("pieceData"))
-    || [];
+    data = JSON.parse(localStorage.getItem("pieceData")) || [];
 }
-
 function saveData(){
-    localStorage.setItem(
-        "pieceData",
-        JSON.stringify(data)
-    );
+    localStorage.setItem("pieceData", JSON.stringify(data));
 }
 
 function rupiah(x){
-    return "Rp " +
-    Math.round(x).toLocaleString("id-ID");
+    return "Rp " + Math.round(x).toLocaleString("id-ID");
 }
 
 function clearForm(){
-
-    tanggal.value="";
-    mpp.value="";
-    target.value="";
-    hasil.value="";
-    nama.value="";
+    tanggal.value=""; mpp.value=""; target.value=""; hasil.value=""; nama.value="";
 }
 
-function tambahData(){
+function namaFile(prefix){
+    let now = new Date();
+    return prefix + "_" + now.toISOString().slice(0,10);
+}
 
+// 🔥 FIX ANDROID DOWNLOAD
+function downloadFile(content, filename, type){
+    let blob = new Blob([content], { type });
+    let a = document.createElement("a");
+
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+// CREATE
+function tambahData(){
     let d = {
         tanggal: tanggal.value,
         mpp: parseInt(mpp.value),
@@ -464,12 +376,7 @@ function tambahData(){
         nama: nama.value
     };
 
-    if(
-        !d.tanggal ||
-        isNaN(d.mpp) ||
-        isNaN(d.target) ||
-        isNaN(d.hasil)
-    ){
+    if(!d.tanggal || isNaN(d.mpp) || isNaN(d.target) || isNaN(d.hasil)){
         alert("Isi semua data!");
         return;
     }
@@ -479,297 +386,316 @@ function tambahData(){
     d.persen = (d.hasil / d.target) * 100;
 
     data.push(d);
-
     saveData();
-
     tampilkan();
-
     clearForm();
 }
 
+// READ
 function tampilkan(){
-
-    listData.innerHTML = "";
-
-    let total = 0;
-
+    listData.innerHTML="";
+    let total=0;
     let hariSet = new Set();
 
-    data.sort(
-        (a,b)=>
-        new Date(a.tanggal)
-        -
-        new Date(b.tanggal)
-    );
+    data.sort((a,b)=> new Date(a.tanggal) - new Date(b.tanggal));
 
     data.forEach((d,i)=>{
-
         total += d.perOrang;
-
         hariSet.add(d.tanggal);
 
-        let warna =
-        d.persen >= 100
-        ? "#22c55e"
-        : d.persen >= 90
-        ? "#facc15"
-        : "#ef4444";
+        let warna = d.persen>=100?"#22c55e":d.persen>=90?"#facc15":"#ef4444";
 
         listData.innerHTML += `
         <div class="data">
-
         <b>${d.tanggal}</b><br>
-
         JML MPP: ${d.mpp}<br>
         Target: ${d.target}<br>
         Acv: ${d.hasil}<br>
+        Per CB : 1100<br>
+        <span style="color:${warna}">Persentase: ${d.persen.toFixed(1)}%</span><br>
+        Menerima: ${rupiah(d.perOrang)}
 
-        <span style="color:${warna}">
-        Persentase:
-        ${d.persen.toFixed(1)}%
-        </span><br>
-
-        Menerima:
-        ${rupiah(d.perOrang)}
-
-        <button class="edit"
-        onclick="editData(${i})">
-        ✏️ Edit
-        </button>
-
-        <button class="hapus"
-        onclick="hapus(${i})">
-        Hapus
-        </button>
-
-        </div>
-        `;
+        <button class="edit" onclick="editData(${i})">✏️ Edit</button>
+        <button class="hapus" onclick="hapus(${i})">Hapus</button>
+        </div>`;
     });
 
-    totalSemua.innerText =
-    "Total Gaji : " + rupiah(total);
-
-    totalHari.innerText =
-    "Total Hari Kerja: "
-    + hariSet.size + " hari";
+    totalSemua.innerText = "Total Gaji : " + rupiah(total);
+    totalHari.innerText = "Total Hari Kerja: " + hariSet.size + " hari";
 }
 
+// EDIT
 function editData(i){
+    let d=data[i];
+    tanggal.value=d.tanggal;
+    mpp.value=d.mpp;
+    target.value=d.target;
+    hasil.value=d.hasil;
+    nama.value=d.nama;
 
-    let d = data[i];
+    editIndex=i;
+    btnTambah.style.display="none";
+    btnUpdate.style.display="block";
 
-    tanggal.value = d.tanggal;
-    mpp.value = d.mpp;
-    target.value = d.target;
-    hasil.value = d.hasil;
-    nama.value = d.nama;
-
-    editIndex = i;
-
-    btnTambah.style.display = "none";
-    btnUpdate.style.display = "block";
-
-    formInput.scrollIntoView({
-        behavior:"smooth"
-    });
+    formInput.scrollIntoView({behavior:"smooth"});
 }
 
+// UPDATE
 function updateData(){
+    if(editIndex===null) return;
 
-    if(editIndex === null) return;
+    let d=data[editIndex];
+    d.tanggal=tanggal.value;
+    d.mpp=parseInt(mpp.value);
+    d.target=parseInt(target.value);
+    d.hasil=parseInt(hasil.value);
+    d.nama=nama.value;
 
-    let d = data[editIndex];
+    d.totalUang=d.hasil*hargaPerCB;
+    d.perOrang=d.totalUang/d.mpp;
+    d.persen=(d.hasil/d.target)*100;
 
-    d.tanggal = tanggal.value;
-    d.mpp = parseInt(mpp.value);
-    d.target = parseInt(target.value);
-    d.hasil = parseInt(hasil.value);
-    d.nama = nama.value;
-
-    d.totalUang = d.hasil * hargaPerCB;
-    d.perOrang = d.totalUang / d.mpp;
-    d.persen = (d.hasil / d.target) * 100;
-
-    editIndex = null;
-
-    btnTambah.style.display = "block";
-    btnUpdate.style.display = "none";
+    editIndex=null;
+    btnTambah.style.display="block";
+    btnUpdate.style.display="none";
 
     saveData();
-
     tampilkan();
-
     clearForm();
 }
 
+// DELETE
 function hapus(i){
-
     data.splice(i,1);
-
     saveData();
-
     tampilkan();
 }
 
+// RESET
 function resetData(){
-
     if(confirm("Hapus semua data?")){
-
         localStorage.removeItem("pieceData");
-
-        data = [];
-
+        data=[];
         tampilkan();
     }
 }
 
-/* ========================= */
-/* EXPORT */
-/* ========================= */
+// EXPORT
+function exportTXT() {
+    if (data.length === 0) return alert("Data kosong!");
 
-function downloadFile(content, filename, type){
+    let text = "📊 REKAP PIECE RATE\n";
+    text += "============================\n\n";
 
-    let blob =
-    new Blob([content], {type});
+    let totalGaji = 0;
+    let hariSet = new Set();
 
-    let a =
-    document.createElement("a");
+    data.forEach(d => {
+        totalGaji += Number(d.perOrang);
+        hariSet.add(d.tanggal);
 
-    a.href =
-    URL.createObjectURL(blob);
-
-    a.download = filename;
-
-    document.body.appendChild(a);
-
-    a.click();
-
-    document.body.removeChild(a);
-}
-
-function exportTXT(){
-
-    if(data.length === 0){
-        alert("Data kosong!");
-        return;
-    }
-
-    let text =
-    "📊 REKAP PIECE RATE\n\n";
-
-    data.forEach(d=>{
-
-        text += `
-📅 ${d.tanggal}
-👥 ${d.mpp}
-🎯 ${d.target}
-📊 ${d.hasil}
-💰 ${rupiah(d.perOrang)}
-
-`;
+        text += `📅 Tanggal   : ${d.tanggal}\n`;
+        text += `👤 Nama      : ${d.nama}\n`;
+        text += `👥 MPP       : ${d.mpp}\n`;
+        text += `🎯 Target    : ${d.target}\n`;
+        text += `📊 Hasil     : ${d.hasil}\n`;
+        text += `📈 Persen    : ${d.persen.toFixed(1)}%\n`;
+        text += `💰 Gaji      : ${rupiah(d.perOrang)}\n`;
+        text += "----------------------------\n\n";
     });
+
+    text += "============================\n";
+    text += `TOTAL HARI : ${hariSet.size}\n`;
+    text += `TOTAL GAJI : ${rupiah(totalGaji)}\n`;
+    text += "============================\n";
 
     downloadFile(
         text,
-        "rekap.txt",
+        namaFile("rekap_piece_rate") + ".txt",
         "text/plain"
     );
 }
 
-function exportCSV(){
+function exportCSV() {
+    if (data.length === 0) return alert("Data kosong!");
 
-    let csv =
-    "Tanggal,MPP,Target,Hasil,Gaji\n";
+    let csv = "Tanggal,Nama,MPP,Target,Hasil,Persen,GajiPerOrang\n";
 
-    data.forEach(d=>{
+    let totalGaji = 0;
+    let hariSet = new Set();
 
-        csv +=
-        `${d.tanggal},${d.mpp},${d.target},${d.hasil},${d.perOrang}\n`;
+    data.forEach(d => {
+        totalGaji += Number(d.perOrang);
+        hariSet.add(d.tanggal);
 
+        csv += `${d.tanggal},${d.nama},${d.mpp},${d.target},${d.hasil},${d.persen.toFixed(1)}%,${d.perOrang}\n`;
     });
+
+    // Tambahan ringkasan di bawah
+    csv += `\n`;
+    csv += `TOTAL HARI,${hariSet.size}\n`;
+    csv += `TOTAL GAJI,${totalGaji}\n`;
 
     downloadFile(
         csv,
-        "rekap.csv",
+        namaFile("rekap_piece_rate") + ".csv",
         "text/csv"
     );
 }
 
-function exportExcel(){
+function exportExcel() {
+
+    let totalGaji = 0;
+    let hariSet = new Set();
 
     let table = `
     <table border="1">
-    <tr>
-    <th>Tanggal</th>
-    <th>MPP</th>
-    <th>Target</th>
-    <th>Hasil</th>
-    <th>Gaji</th>
-    </tr>
+        <tr>
+            <th>Tanggal</th>
+            <th>Nama</th>
+            <th>MPP</th>
+            <th>Target</th>
+            <th>Hasil</th>
+            <th>Persen</th>
+            <th>Gaji/Orang</th>
+        </tr>
     `;
 
-    data.forEach(d=>{
+    data.forEach(d => {
+        totalGaji += Number(d.perOrang);
+        hariSet.add(d.tanggal);
 
         table += `
         <tr>
-        <td>${d.tanggal}</td>
-        <td>${d.mpp}</td>
-        <td>${d.target}</td>
-        <td>${d.hasil}</td>
-        <td>${d.perOrang}</td>
+            <td>${d.tanggal}</td>
+            <td>${d.nama}</td>
+            <td>${d.mpp}</td>
+            <td>${d.target}</td>
+            <td>${d.hasil}</td>
+            <td>${d.persen.toFixed(1)}%</td>
+            <td>${d.perOrang}</td>
         </tr>
         `;
     });
 
-    table += `</table>`;
+    table += `
+        <tr>
+            <td colspan="6"><b>Total Gaji</b></td>
+            <td><b>${totalGaji}</b></td>
+        </tr>
+        <tr>
+            <td colspan="6"><b>Total Hari</b></td>
+            <td><b>${hariSet.size}</b></td>
+        </tr>
+    </table>
+    `;
 
     downloadFile(
         table,
-        "rekap.xls",
+        namaFile("rekap_piece_rate") + ".xls",
         "application/vnd.ms-excel"
     );
 }
 
-function exportPDF(){
+function exportPDF() {
 
-    window.print();
-}
+    let totalGaji = 0;
+    let hariSet = new Set();
 
-/* ========================= */
-/* WHATSAPP */
-/* ========================= */
+    let text = `
+    <html>
+    <head>
+        <title>Rekap Piece Rate</title>
+        <style>
+            body{
+                font-family: Arial;
+                padding: 20px;
+                background: #fff;
+            }
+            .box{
+                white-space: pre-wrap;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+            h2{
+                text-align:center;
+            }
+        </style>
+    </head>
+    <body>
 
-function kirimWA(){
+    <h2>📊 REKAP PIECE RATE</h2>
+    <div class="box">
+`;
 
-    let text =
-    "📊 *REKAP PIECE RATE*\n\n";
-
-    data.forEach(d=>{
+    data.forEach(d => {
+        totalGaji += Number(d.perOrang);
+        hariSet.add(d.tanggal);
 
         text += `
 📅 ${d.tanggal}
-👥 ${d.mpp}
-🎯 ${d.target}
-📊 ${d.hasil}
-💰 ${rupiah(d.perOrang)}
+👥 Total MPP: ${d.mpp}
+🗿 Nama : ${d.nama}
+🎯 Target: ${d.target}
+📊 Hasil: ${d.hasil}
+📈 Persen: ${d.persen.toFixed(1)}%
+💰 Gaji/Orang: ${rupiah(d.perOrang)}
 
+----------------------------
 `;
-
     });
 
-    window.open(
-    "https://wa.me/?text="
-    + encodeURIComponent(text));
+    text += `
+Total Hari: ${hariSet.size}
+Total Gaji: ${rupiah(totalGaji)}
+
+    </div>
+    </body>
+    </html>
+    `;
+
+    let w = window.open("");
+    w.document.write(text);
+    w.document.close();
+    w.print();
 }
 
-/* ========================= */
-/* INIT */
-/* ========================= */
+// WA
+function kirimWA(){
+    let text="📊 *REKAP PIECE RATE*\n\n";
 
+    let totalGaji = 0;
+    let hariSet = new Set();
+
+    data.forEach(d=>{
+        totalGaji += d.perOrang;
+        hariSet.add(d.tanggal);
+
+        text+=`📅 ${d.tanggal}
+👥 Total MPP: ${d.mpp}
+🗿 Nama : ${d.nama}
+🎯 Target: ${d.target}
+📊 Hasil: ${d.hasil}
+📈 Persen: ${d.persen.toFixed(1)}%
+💰 Gaji/Orang: ${rupiah(d.perOrang)}
+
+`;
+    });
+
+    // TAMBAHAN TOTAL
+    text+=`====================
+💰 *TOTAL GAJI*: ${rupiah(totalGaji)}
+📆 *TOTAL HARI KERJA*: ${hariSet.size} hari`;
+
+
+    window.open("https://wa.me/6285862797682?text="+encodeURIComponent(text));
+}
+
+
+
+// INIT
 loadData();
-
 tampilkan();
-
 </script>
 
 </body>
