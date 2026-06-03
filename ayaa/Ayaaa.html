@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Untuk Kamu ❤️</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+}
+
+.container{
+width:90%;
+max-width:700px;
+z-index:10;
+padding:20px;
+}
+
+.card{
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
+border-radius:25px;
+padding:40px 25px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.envelope{
+font-size:120px;
+cursor:pointer;
+transition:.5s;
+animation:bounce 2s infinite;
+}
+
+.envelope:hover{
+transform:scale(1.1);
+}
+
+.title{
+font-size:28px;
+margin-top:15px;
+}
+
+.subtitle{
+margin-top:10px;
+opacity:.9;
+}
+
+.btn{
+margin-top:25px;
+padding:14px 30px;
+border:none;
+border-radius:50px;
+background:white;
+color:#ff4d6d;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+}
+
+#story{
+display:none;
+}
+
+#text{
+font-size:28px;
+font-weight:600;
+line-height:1.6;
+min-height:150px;
+}
+
+.nextBtn{
+margin-top:30px;
+padding:12px 25px;
+border:none;
+border-radius:50px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+background:white;
+color:#ff4d6d;
+}
+
+#memory{
+display:none;
+}
+
+#memory h1{
+margin-bottom:20px;
+font-size:35px;
+}
+
+.memoryText{
+line-height:1.8;
+font-size:18px;
+}
+
+.gallery{
+margin-top:30px;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+}
+
+.photo{
+width:130px;
+height:150px;
+background:white;
+color:#ff4d6d;
+border-radius:15px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+font-weight:bold;
+animation:fadeUp 1s forwards;
+}
+
+.heart{
+position:absolute;
+bottom:-50px;
+font-size:24px;
+animation:float 8s linear infinite;
+opacity:.7;
+pointer-events:none;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0);
+opacity:0;
+}
+20%{
+opacity:.8;
+}
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+@keyframes bounce{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-10px);
+}
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+</style>
+</head>
+<body>
+
+<audio id="bgm" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+<div id="welcome" class="card">
+
+<div class="envelope">💌</div>
+
+<div class="title">
+Sebuah Surat Untukmu
+</div>
+
+<div class="subtitle">
+Klik tombol di bawah untuk membukanya ❤️
+</div>
+
+<button class="btn" onclick="startStory()">
+Buka Surat
+</button>
+
+</div>
+
+<div id="story" class="card">
+
+<div id="text"></div>
+
+<button class="nextBtn" onclick="nextMessage()">
+Lanjut ❤️
+</button>
+
+</div>
+
+<div id="memory" class="card">
+
+<h1>❤️ OUR MEMORIES ❤️</h1>
+
+<div class="memoryText">
+Terima kasih telah menjadi bagian dari hidupku.<br><br>
+
+Setiap tawa, cerita, dan kenangan yang kita buat
+akan selalu menjadi hal yang paling berharga bagiku.
+</div>
+
+<!-- Kalo gamau pake poto hapus aja bagian ini -->
+
+
+<!-- Sampe Sini  -->
+
+<div style="margin-top:30px;font-size:22px;">
+Terima kasih telah menjadi bagian terindah dalam hidupku ❤️
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const messages = [
+
+"Happy birthday sayang... ❤️",
+
+"Semoga setelah menginjak kepala dua ini rejeki kamu makin lancar dan mengalir dari mana aja...",
+
+"Badan kamu semakin sehat dan kuat, serta bahagia selalu.",
+
+"Maaf soal kemaren ya, maaf tentang ego aku yang selalu ngeluapin semuanya ke kamu.",
+
+"Aku sadar aku salah kemaren, maaf.",
+
+"Bohong kalau aku bilang aku nggak nangis pas tau kamu blok aku, dan sekarang aku benci banget sama hujan btw...",
+
+"Tapi tenang aja, aku udah berusaha buat nerima kalau sekarang kita harus masing-masing.",
+
+"Aku harap kamu bahagia selalu tanpa bayang-bayang aku.",
+
+"Doa yang terbaik untuk kamu di ulang tahun kali ini.",
+
+"Karena kayaknya ini ucapan terakhir, tahun depan mungkin udah nggak akan ada lagi.",
+
+"Jangan hubungi aku cuma karena ini, aku cuma mau ngucapin dan nggak berharap kamu hubungi aku lagi.",
+
+"Aku nggak mau selalu hadir di hidup kamu cuma buat nyusahin kamu.",
+
+"Be happy sayang, dan lupain aku. Aku juga lagi berusaha buat ngelupain kamu.",
+
+"Aku juga sempet kepikiran buat kesana sendirian, dan kepikiran buat pergi lagi besok, tapi nggak diizinin mama :)",
+
+"Kemaren setelah Sabtu, aku berharap banget kamu dateng pas Minggunya. Dan berharap lagi minggu depannya, tapi ternyata nggak ada hehe.",
+
+"Jadi aku rasa kamu udah di titik capek banget sama aku.",
+
+"Aku minta maaf dan terima kasih untuk semua effort kamu.",
+
+"I loved you ❤️"
+
+
+];
+
+let current = 0;
+
+function startStory(){
+
+document.getElementById("welcome").style.display="none";
+document.getElementById("story").style.display="block";
+
+const audio = document.getElementById("bgm");
+audio.play().catch(()=>{});
+
+typeWriter(messages[current]);
+
+}
+
+function typeWriter(text){
+
+const element = document.getElementById("text");
+element.innerHTML="";
+
+let i=0;
+
+const typing = setInterval(()=>{
+
+element.innerHTML += text.charAt(i);
+
+i++;
+
+if(i>=text.length){
+clearInterval(typing);
+}
+
+},50);
+
+}
+
+function nextMessage(){
+
+current++;
+
+if(current < messages.length){
+
+typeWriter(messages[current]);
+
+}else{
+
+document.getElementById("story").style.display="none";
+document.getElementById("memory").style.display="block";
+
+}
+
+}
+
+function createHeart(){
+
+const heart = document.createElement("div");
+
+heart.classList.add("heart");
+
+const hearts = ["❤️","💕","💖","💗"];
+
+heart.innerHTML =
+hearts[Math.floor(Math.random()*hearts.length)];
+
+heart.style.left =
+Math.random()*100 + "vw";
+
+heart.style.fontSize =
+(20 + Math.random()*20) + "px";
+
+heart.style.animationDuration =
+(5 + Math.random()*5) + "s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},10000);
+
+}
+
+setInterval(createHeart,400);
+
+</script>
+
+</body>
+</html>
